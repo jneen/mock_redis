@@ -1,5 +1,9 @@
 class MockRedis
   module MiscMethods
+    def hash
+      @@hash ||= {}
+    end
+
     def del(*keys)
       keys.flatten.each do |key|
         self.hash.delete key
