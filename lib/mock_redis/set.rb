@@ -1,7 +1,10 @@
 class MockRedis
+  require 'set'
+
   module SetMethods
     def sadd(key, value)
       fail_unless_set(key)
+      value = value.to_s
       case set = self.hash[key]
         when nil ; self.hash[key] = Set.new([value])
         when Set ; set.add value
@@ -19,8 +22,8 @@ class MockRedis
     def sismember(key, value)
       fail_unless_set(key)
       case set = self.hash[key]
-        when nil ; false
-        when Set ; set.member?(value.to_s)
+        when nil ; return false ; puts "no set here"
+        when Set ; set.include?(value.to_s)
       end
     end
 
