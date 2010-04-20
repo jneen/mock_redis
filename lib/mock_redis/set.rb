@@ -12,10 +12,11 @@ class MockRedis
     end
 
     def srem(key, value)
+      value = value.to_s
       fail_unless_set(key)
       case set = self.hash[key]
         when nil ; return
-        when Set ; set.delete value
+        when Set ; set.delete(value)
       end
     end
 
