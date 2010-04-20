@@ -1,7 +1,7 @@
 class MockRedis
   module SetMethods
     def sadd(key, value)
-      fail_unless_set(dst_key)
+      fail_unless_set(key)
       case set = self.hash[key]
         when nil ; self.hash[key] = Set.new([value])
         when Set ; set.add value
@@ -9,7 +9,7 @@ class MockRedis
     end
 
     def srem(key, value)
-      fail_unless_set(dst_key)
+      fail_unless_set(key)
       case set = self.hash[key]
         when nil ; return
         when Set ; set.delete value
@@ -17,7 +17,7 @@ class MockRedis
     end
 
     def sismember(key, value)
-      fail_unless_set(dst_key)
+      fail_unless_set(key)
       case set = self.hash[key]
         when nil ; false
         when Set ; set.member?(value.to_s)
@@ -25,7 +25,7 @@ class MockRedis
     end
 
     def spop(key, val)
-      fail_unless_set(dst_key)
+      fail_unless_set(key)
       case set = self.hash[key]
         when nil ; nil
         when Set
