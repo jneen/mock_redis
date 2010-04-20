@@ -92,7 +92,7 @@ class MockRedis
 
     private
     def is_a_set?(key)
-      self.hash[key].is_a? Set || self.hash[key].nil?
+      self.hash[key].is_a?(Set) || self.hash[key].nil?
     end
 
     def fail_unless_set(key)
