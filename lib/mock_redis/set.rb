@@ -20,7 +20,7 @@ class MockRedis
       fail_unless_set(dst_key)
       case set = self.hash[key]
         when nil ; false
-        when Set ; set.member?(value)
+        when Set ; set.member?(value.to_s)
       end
     end
 
